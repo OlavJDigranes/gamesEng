@@ -1,3 +1,7 @@
+//Created for the games engineering module for Edinburgh Napier University January 2022
+
+//This is a simple demo using provided code as a proof of concept and to test that initial setup works
+
 #include <SFML/Graphics.hpp>
 
 int main(){
