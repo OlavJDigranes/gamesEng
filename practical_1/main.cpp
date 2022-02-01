@@ -29,7 +29,7 @@ RectangleShape paddles[2];
 
 void Load() {
 	// Load score boards
-	font.loadFromFile("res/fonts/Roboto-Bold.ttf");
+	font.loadFromFile("res/fonts/RobotoMono-Bold.ttf");
 	text.setFont(font);
 	text.setCharacterSize(24);
 	text.setString("0 | 0");
@@ -100,40 +100,53 @@ void Update(RenderWindow& window) {
 	}
 	float direction2 = .0f;
 	paddles[0].move(Vector2f(0, direction1 * paddleSpeed * dt));
+
 	// Handle paddle 2 movement
+	//Make this AI:
+	//Use dir2 = ball.getPos.y * dt
+	
 	if (Keyboard::isKeyPressed(controls[2])) {
 		direction2--;
 	}
 	if (Keyboard::isKeyPressed(controls[3])) {
 		direction2++;
 	}
-	paddles[1].move(Vector2f(0, direction2 * paddleSpeed * dt));
-	// Handle ball movement
-	ball.move(ballVelocity * dt);
 
 	// Collisions check
 	const float bx = ball.getPosition().x;
 	const float by = ball.getPosition().y;
+
+	//direction2 = by;
+	paddles[1].move(Vector2f(0, by * paddleSpeed * dt));
+
+	// Handle ball movement
+	ball.move(ballVelocity * dt);
+
+	
 	// Bottom wall
 	if (by > gameHeight) {
 		ballVelocity.x *= 1.1f;
 		ballVelocity.y *= -1.1f;
 		ball.move(Vector2f(0, -10));
 	}
+
 	// Top wall
 	else if (by < 0) {
 		ballVelocity.x *= 1.1f;
 		ballVelocity.y *= -1.1f;
 		ball.move(Vector2f(0, 10));
 	}
+
 	// Right wall
 	else if (bx > gameWidth) {
 		Reset(2);
 	}
+
 	// Left wall
 	else if (bx < 0) {
 		Reset(1);
 	}
+
 	// Left paddle collision
 	else if (bx <= paddleSize.x + borderSpace &&
 		by >= paddles[0].getPosition().y - (paddleSize.y * 0.5) &&
@@ -142,6 +155,7 @@ void Update(RenderWindow& window) {
 		ballVelocity.y *= 1.1f;
 		ball.move(Vector2f(0, 10));
 	}
+
 	// Right paddle collision
 	else if (bx >= (-1.5f * paddleSize.x - borderSpace + gameWidth) &&
 		by >= paddles[1].getPosition().y - (paddleSize.y * 0.5) &&
