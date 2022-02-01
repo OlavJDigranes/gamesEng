@@ -16,6 +16,7 @@ const float ballRadius = 10.f;
 const int gameWidth = 800;
 const int gameHeight = 600;
 const float paddleSpeed = 400.f;
+//const float paddleSpeed = 1.f;
 Vector2f ballVelocity;
 bool server = false;
 const float borderSpace = 10.f;
@@ -105,19 +106,29 @@ void Update(RenderWindow& window) {
 	//Make this AI:
 	//Use dir2 = ball.getPos.y * dt
 	
-	if (Keyboard::isKeyPressed(controls[2])) {
-		direction2--;
-	}
-	if (Keyboard::isKeyPressed(controls[3])) {
-		direction2++;
-	}
+	//if (Keyboard::isKeyPressed(controls[2])) {
+	//	direction2--;
+	//}
+	//if (Keyboard::isKeyPressed(controls[3])) {
+	//	direction2++;
+	//}
 
 	// Collisions check
 	const float bx = ball.getPosition().x;
 	const float by = ball.getPosition().y;
 
+	std::cout << by << endl;
+
+	if (by >= paddles[1].getPosition().y - (paddleSize.y * 0.5)) {
+		direction2++;
+	}
+
+	if (by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
+		direction2--;
+	}
+
 	//direction2 = by;
-	paddles[1].move(Vector2f(0, by * paddleSpeed * dt));
+	paddles[1].move(Vector2f(0, (direction2) * paddleSpeed * dt));
 
 	// Handle ball movement
 	ball.move(ballVelocity * dt);
