@@ -106,12 +106,12 @@ void Update(RenderWindow& window) {
 	//Make this AI:
 	//Use dir2 = ball.getPos.y * dt
 	
-	//if (Keyboard::isKeyPressed(controls[2])) {
-	//	direction2--;
-	//}
-	//if (Keyboard::isKeyPressed(controls[3])) {
-	//	direction2++;
-	//}
+	if (Keyboard::isKeyPressed(controls[2])) {
+		direction2--;
+	}
+	if (Keyboard::isKeyPressed(controls[3])) {
+		direction2++;
+	}
 
 	// Collisions check
 	const float bx = ball.getPosition().x;
@@ -119,13 +119,13 @@ void Update(RenderWindow& window) {
 
 	std::cout << by << endl;
 
-	if (by >= paddles[1].getPosition().y - (paddleSize.y * 0.5)) {
-		direction2++;
-	}
+	//if (by >= paddles[1].getPosition().y - (paddleSize.y * 0.5)) {
+	//	direction2++;
+	//}
 
-	if (by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
-		direction2--;
-	}
+	//if (by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
+	//	direction2--;
+	//}
 
 	//direction2 = by;
 	paddles[1].move(Vector2f(0, (direction2) * paddleSpeed * dt));
@@ -160,8 +160,10 @@ void Update(RenderWindow& window) {
 
 	// Left paddle collision
 	else if (bx <= paddleSize.x + borderSpace &&
+	//else if (bx <= paddleSize.x &&
 		by >= paddles[0].getPosition().y - (paddleSize.y * 0.5) &&
-		by <= paddles[0].getPosition().y + (paddleSize.y * 0.5)) {
+		by <= paddles[0].getPosition().y + (paddleSize.y * 0.5)) 
+	{
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
 		ball.move(Vector2f(0, 10));
@@ -169,8 +171,10 @@ void Update(RenderWindow& window) {
 
 	// Right paddle collision
 	else if (bx >= (-1.5f * paddleSize.x - borderSpace + gameWidth) &&
+	//else if (bx >= (-1.5f * paddleSize.x + gameWidth) &&
 		by >= paddles[1].getPosition().y - (paddleSize.y * 0.5) &&
-		by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
+		by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) 
+	{
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
 		ball.move(Vector2f(0, -10));
