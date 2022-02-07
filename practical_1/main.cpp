@@ -117,15 +117,15 @@ void Update(RenderWindow& window) {
 	const float bx = ball.getPosition().x;
 	const float by = ball.getPosition().y;
 
-	std::cout << by << endl;
+	//std::cout << by << endl;
 
-	//if (by >= paddles[1].getPosition().y - (paddleSize.y * 0.5)) {
-	//	direction2++;
-	//}
+	if (by >= paddles[1].getPosition().y - (paddleSize.y * 0.5)) {
+		direction2++;
+	}
 
-	//if (by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
-	//	direction2--;
-	//}
+	if (by <= paddles[1].getPosition().y + (paddleSize.y * 0.5)) {
+		direction2--;
+	}
 
 	//direction2 = by;
 	paddles[1].move(Vector2f(0, (direction2) * paddleSpeed * dt));
@@ -166,7 +166,7 @@ void Update(RenderWindow& window) {
 	{
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
-		ball.move(Vector2f(0, 10));
+		ball.move(Vector2f(10, 0));
 	}
 
 	// Right paddle collision
@@ -177,7 +177,7 @@ void Update(RenderWindow& window) {
 	{
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
-		ball.move(Vector2f(0, -10));
+		ball.move(Vector2f(-10, 0));
 	}
 }
 
