@@ -1,6 +1,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "ship.h"
+#include "game.h"
 
 using namespace sf;
 using namespace std;
@@ -9,8 +11,9 @@ using namespace std;
 //Main.cpp
 sf::Texture spritesheet;
 sf::Sprite invader;
-const int gameWidth = 800;
-const int gameHeight = 600;
+std::vector<Ship*> ships;
+//const int gameWidth = 800;
+//const int gameHeight = 600;
 
 
 void Load() {
