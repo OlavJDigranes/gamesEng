@@ -32,7 +32,7 @@ set_target_properties(PRACTICAL_1
 )
 add_dependencies(PRACTICAL_1 copy_resources)
 
-#### practical_3 ####
+#### practical_2 ####
 file(GLOB_RECURSE SOURCES 2_invaders/*.cpp 2_invaders/*.h)
 add_executable(2_INVADERS ${SOURCES} )
 target_include_directories(2_INVADERS SYSTEM PRIVATE ${SFML_INCS})
