@@ -22,14 +22,24 @@ void Load() {
     }
     invader.setTexture(spritesheet);
     invader.setTextureRect(IntRect(Vector2(0, 0), Vector2(32, 32)));
+
+	Invader* inv = new Invader(sf::IntRect(Vector2(0, 0), Vector2(32, 32)), { 100,100 });
+	ships.push_back(inv);
 }
 
-void Update(RenderWindow& window) {
-
+void Update() {
+	static Clock clock;
+	float dt = clock.restart().asSeconds();
+	for (auto& s : ships) {
+		s->Update(dt);
+	};
 }
 
 void Render(RenderWindow& window) {
-    window.draw(invader);
+	for (const auto s : ships) {
+		window.draw(*s);
+	}
+	window.draw(invader);
 }
 
 int main() {
@@ -43,7 +53,7 @@ int main() {
 			}
 		}
 		window.clear();
-		Update(window);
+		Update();
 		Render(window);
 		window.display();
 	}
