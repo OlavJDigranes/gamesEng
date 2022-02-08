@@ -2,7 +2,8 @@
 #include <iostream>
 #include "ship.h"
 #include "game.h"
-//#include "bullet.h"
+#include "bullet.h"
+
 using namespace sf;
 using namespace std;
 
@@ -48,10 +49,27 @@ void Invader::Update(const float& dt) {
 			ships[i]->moveDown();
 		}
 	}
+
+	static float firetime = 0.f;
+	firetime -= dt;
+
+	if (firetime <= 0 && rand() % 100 == 0) {
+		Bullet::Fire(getPosition(), true);
+		firetime = 4.0f + (rand() % 60);
+	}
 }
 
 void Invader::moveDown() {
 	move(Vector2f(0.0f, 24.0f));
+}
+
+void Ship::Explode() {
+	setTextureRect(IntRect(Vector2(128, 32), Vector2(32, 32)));
+	_exploded = true;
+}
+
+bool Ship::is_exploded() const {
+	return _exploded;
 }
 
 // Player
@@ -68,6 +86,14 @@ void Player::Update(const float& dt) {
 	}
 	if (Keyboard::isKeyPressed(Keyboard::D) && (getPosition().x < gameWidth - 16)) {
 		direction++;
+	}
+
+	static float firetime = 0.0f;
+	firetime -= dt;
+
+	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) {
+		Bullet::Fire(getPosition(), false);
+		firetime = 0.7f;
 	}
 
 	move(Vector2f(direction * 300.f * dt, 0));

@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -7,6 +8,7 @@ protected:
     sf::IntRect _sprite;
     //Default constructor is hidden
     Ship();
+    bool _exploded = false;
     bool _player = false;
 public:
     //Constructor that takes a sprite
@@ -16,6 +18,9 @@ public:
     //Update, virtual so can be overridden, but not pure virtual
     virtual void Update(const float &dt);
     virtual void moveDown();
+    bool is_exploded() const;
+    virtual void Explode();
+    bool is_player();
 };
 
 class Invader : public Ship {

@@ -3,7 +3,7 @@
 #include <iostream>
 #include "ship.h"
 #include "game.h"
-//#include "bullet.h"
+#include "bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -13,16 +13,11 @@ using namespace std;
 sf::Texture spritesheet;
 sf::Sprite invader;
 std::vector<Ship*> ships;
-//const int gameWidth = 800;
-//const int gameHeight = 600;
-
 
 void Load() {
     if (!spritesheet.loadFromFile("res/spriteSheets/invaders_sheet.png")) {
         cerr << "Failed to load spritesheet!" << std::endl;
     }
-    //invader.setTexture(spritesheet);
-    //invader.setTextureRect(IntRect(Vector2(0, 0), Vector2(32, 32)));
 
 	Invader::direction = true;
 	Invader::speed = 100.0f;
@@ -49,7 +44,7 @@ void Update(RenderWindow& window) {
 		s->Update(dt);
 	};
 
-	//std::cout << dt << endl;
+	Bullet::Update(dt);
 
 	//quit with esc press. 
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -61,7 +56,8 @@ void Render(RenderWindow& window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
-	window.draw(invader);
+	//window.draw(invader);
+	Bullet::Render(window);
 }
 
 int main() {
