@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+
 class Ship : public sf::Sprite {
 protected:
     sf::IntRect _sprite;
     //Default constructor is hidden
     Ship();
+    bool _player = false;
 public:
     //Constructor that takes a sprite
     explicit Ship(sf::IntRect ir);

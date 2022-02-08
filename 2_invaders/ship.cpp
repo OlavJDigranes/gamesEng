@@ -2,7 +2,7 @@
 #include <iostream>
 #include "ship.h"
 #include "game.h"
-#include "bullet.h"
+//#include "bullet.h"
 using namespace sf;
 using namespace std;
 
