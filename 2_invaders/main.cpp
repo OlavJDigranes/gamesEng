@@ -23,6 +23,9 @@ void Load() {
     //invader.setTexture(spritesheet);
     //invader.setTextureRect(IntRect(Vector2(0, 0), Vector2(32, 32)));
 
+	Invader::direction = true;
+	Invader::speed = 100.0f;
+
 	for (int i = 0; i < invaders_rows; i++) {
 		for (int j = 0; j < invaders_columns; j++) {
 			Invader* inv = new Invader(IntRect(Vector2(i * 32, 0), Vector2(32, 32)), { float(20 + j * 32), float(20 + i * 32) });
@@ -41,6 +44,13 @@ void Update(RenderWindow& window) {
 	for (auto& s : ships) {
 		s->Update(dt);
 	};
+
+	//std::cout << dt << endl;
+
+	//quit with esc press. 
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+		window.close();
+	}
 }
 
 void Render(RenderWindow& window) {

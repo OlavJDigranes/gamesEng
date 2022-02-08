@@ -1,4 +1,5 @@
 //ship.cpp
+#include <iostream>
 #include "ship.h"
 #include "game.h"
 #include "bullet.h"
@@ -21,6 +22,8 @@ void Ship::Update(const float& dt) {}
 //Although we set this to pure virtual, we still have to define it.
 Ship::~Ship() = default;
 
+void Ship::moveDown() {}
+
 Invader::Invader() : Ship() {}
 
 Invader::Invader(sf::IntRect ir, sf::Vector2f pos) : Ship(ir) {
@@ -41,7 +44,12 @@ void Invader::Update(const float& dt) {
 		(!direction && getPosition().x < 16)) {
 		direction = !direction;
 		for (int i = 0; i < ships.size(); ++i) {
-			ships[i]->move(Vector2f(0.0f, 24.0f));
+			//ships[i]->move(Vector2f(0.0f, 24.0f));
+			ships[i]->moveDown();
 		}
 	}
+}
+
+void Invader::moveDown() {
+	move(Vector2f(0.0f, 24.0f));
 }

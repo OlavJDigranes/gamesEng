@@ -12,6 +12,7 @@ public:
     virtual ~Ship() = 0;
     //Update, virtual so can be overridden, but not pure virtual
     virtual void Update(const float &dt);
+    virtual void moveDown();
 };
 
 class Invader : public Ship {
@@ -21,6 +22,7 @@ public:
     void Update(const float& dt) override;
     static bool direction;
     static float speed;
+    void moveDown() override;
 };
 
 // Invader
