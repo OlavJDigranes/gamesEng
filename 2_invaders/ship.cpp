@@ -45,7 +45,6 @@ void Invader::Update(const float& dt) {
 		(!direction && getPosition().x < 16)) {
 		direction = !direction;
 		for (int i = 0; i < ships.size(); ++i) {
-			//ships[i]->move(Vector2f(0.0f, 24.0f));
 			ships[i]->moveDown();
 		}
 	}
@@ -57,6 +56,11 @@ void Invader::Update(const float& dt) {
 		Bullet::Fire(getPosition(), true);
 		firetime = 4.0f + (rand() % 60);
 	}
+
+	//Fading
+	//if (is_exploded) {
+	//	static float hitTime = 0.5f; 
+	//}
 }
 
 void Invader::moveDown() {
@@ -91,6 +95,7 @@ void Player::Update(const float& dt) {
 	if (Keyboard::isKeyPressed(Keyboard::D) && (getPosition().x < gameWidth - 16)) {
 		direction++;
 	}
+	move(Vector2f(direction * 300.f * dt, 0));
 
 	static float firetime = 0.0f;
 	firetime -= dt;
@@ -99,6 +104,4 @@ void Player::Update(const float& dt) {
 		Bullet::Fire(getPosition(), false);
 		firetime = 0.7f;
 	}
-
-	move(Vector2f(direction * 300.f * dt, 0));
 }
