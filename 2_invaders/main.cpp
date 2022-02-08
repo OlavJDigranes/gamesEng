@@ -7,14 +7,10 @@
 using namespace sf;
 using namespace std;
 
-
 //Main.cpp
 sf::Texture spritesheet;
 sf::Sprite invader;
 std::vector<Ship*> ships;
-//const int gameWidth = 800;
-//const int gameHeight = 600;
-
 
 void Load() {
     if (!spritesheet.loadFromFile("res/spriteSheets/invaders_sheet.png")) {
@@ -35,10 +31,6 @@ void Load() {
 
 	Player* p = new Player();
 	ships.push_back(p);
-
-
-	//Invader* inv = new Invader(sf::IntRect(Vector2(0, 0), Vector2(32, 32)), { 100,100 });
-	//ships.push_back(inv);
 }
 
 void Update(RenderWindow& window) {
@@ -47,8 +39,6 @@ void Update(RenderWindow& window) {
 	for (auto& s : ships) {
 		s->Update(dt);
 	};
-
-	//std::cout << dt << endl;
 
 	//quit with esc press. 
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
