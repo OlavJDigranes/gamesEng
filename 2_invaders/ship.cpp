@@ -53,3 +53,22 @@ void Invader::Update(const float& dt) {
 void Invader::moveDown() {
 	move(Vector2f(0.0f, 24.0f));
 }
+
+// Player
+Player::Player() : Ship(IntRect(Vector2(160, 32), Vector2(32, 32))) {
+	setPosition({ gameWidth * .5f, gameHeight - 32.f });
+}
+
+void Player::Update(const float& dt) {
+	Ship::Update(dt);
+
+	float direction = .0f;
+	if (Keyboard::isKeyPressed(Keyboard::A) && (getPosition().x > 16)) {
+		direction--;
+	}
+	if (Keyboard::isKeyPressed(Keyboard::D) && (getPosition().x < gameWidth - 16)) {
+		direction++;
+	}
+
+	move(Vector2f(direction * 300.f * dt, 0));
+}

@@ -33,6 +33,9 @@ void Load() {
 		}
 	}
 
+	Player* p = new Player();
+	ships.push_back(p);
+
 
 	//Invader* inv = new Invader(sf::IntRect(Vector2(0, 0), Vector2(32, 32)), { 100,100 });
 	//ships.push_back(inv);
