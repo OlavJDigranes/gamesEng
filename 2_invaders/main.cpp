@@ -20,14 +20,22 @@ void Load() {
     if (!spritesheet.loadFromFile("res/spriteSheets/invaders_sheet.png")) {
         cerr << "Failed to load spritesheet!" << std::endl;
     }
-    invader.setTexture(spritesheet);
-    invader.setTextureRect(IntRect(Vector2(0, 0), Vector2(32, 32)));
+    //invader.setTexture(spritesheet);
+    //invader.setTextureRect(IntRect(Vector2(0, 0), Vector2(32, 32)));
 
-	Invader* inv = new Invader(sf::IntRect(Vector2(0, 0), Vector2(32, 32)), { 100,100 });
-	ships.push_back(inv);
+	for (int i = 0; i < invaders_rows; i++) {
+		for (int j = 0; j < invaders_columns; j++) {
+			Invader* inv = new Invader(IntRect(Vector2(i * 32, 0), Vector2(32, 32)), { float(20 + j * 32), float(20 + i * 32) });
+			ships.push_back(inv);
+		}
+	}
+
+
+	//Invader* inv = new Invader(sf::IntRect(Vector2(0, 0), Vector2(32, 32)), { 100,100 });
+	//ships.push_back(inv);
 }
 
-void Update() {
+void Update(RenderWindow& window) {
 	static Clock clock;
 	float dt = clock.restart().asSeconds();
 	for (auto& s : ships) {
@@ -53,7 +61,7 @@ int main() {
 			}
 		}
 		window.clear();
-		Update();
+		Update(window);
 		Render(window);
 		window.display();
 	}
