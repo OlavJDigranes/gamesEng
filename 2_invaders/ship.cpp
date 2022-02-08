@@ -63,6 +63,10 @@ void Invader::moveDown() {
 	move(Vector2f(0.0f, 24.0f));
 }
 
+bool Ship::is_player() {
+	return _player;
+};
+
 void Ship::Explode() {
 	setTextureRect(IntRect(Vector2(128, 32), Vector2(32, 32)));
 	_exploded = true;
