@@ -59,8 +59,13 @@ void Invader::Update(const float& dt) {
 	}
 
 	//Fading
-	//if (is_exploded) {
-	//	static float hitTime = 0.5f; 
+	//static float hitTime = 0.5f;
+	//if (is_exploded()) {
+	//	hitTime -= dt;
+	//	if (hitTime == 0) {
+	//		Invader::setColor(sf::Color(0, 0, 0, 0));
+	//		std::cout << hitTime << endl; 
+	//	}
 	//}
 }
 

@@ -32,6 +32,7 @@ void Bullet::Fire(const Vector2f& pos, const bool mode) {
 }
 
 void Bullet::_Update(const float& dt) {
+	float hitTime = 0.5f;
 	if (getPosition().y < -32 || getPosition().y > gameHeight + 32) {
 		return;
 	}
@@ -50,6 +51,11 @@ void Bullet::_Update(const float& dt) {
 			if (!s->is_exploded() && s->getGlobalBounds().intersects(boundingBox)) {
 				s->Explode();
 				setPosition(Vector2f(-100, -100));
+				hitTime -= dt;
+				if (hitTime == 0) {
+					s->setColor(sf::Color(0, 0, 0, 0));
+					//std::cout << hitTime << endl; 
+				}
 				return;
 			}
 		}
