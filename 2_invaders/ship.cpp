@@ -30,6 +30,7 @@ Invader::Invader() : Ship() {}
 Invader::Invader(sf::IntRect ir, sf::Vector2f pos) : Ship(ir) {
 	setOrigin(Vector2f(16.f, 16.f));;
 	setPosition(pos);
+	isInvader = true; 
 }
 
 //void Invader::Update(const float& dt) {
@@ -67,10 +68,6 @@ void Invader::moveDown() {
 	move(Vector2f(0.0f, 24.0f));
 }
 
-bool Ship::is_player() {
-	return _player;
-};
-
 void Ship::Explode() {
 	setTextureRect(IntRect(Vector2(128, 32), Vector2(32, 32)));
 	_exploded = true;
@@ -83,6 +80,7 @@ bool Ship::is_exploded() const {
 // Player
 Player::Player() : Ship(IntRect(Vector2(160, 32), Vector2(32, 32))) {
 	setPosition({ gameWidth * .5f, gameHeight - 32.f });
+	isInvader = false;
 }
 
 void Player::Update(const float& dt) {
@@ -105,3 +103,18 @@ void Player::Update(const float& dt) {
 		firetime = 0.7f;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//bool Ship::is_player() {
+//	return _player;
+//};

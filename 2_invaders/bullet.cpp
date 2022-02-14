@@ -40,10 +40,11 @@ void Bullet::_Update(const float& dt) {
 		const FloatRect boundingBox = getGlobalBounds();
 
 		for (auto s : ships) {
-			if (!_mode && (s->is_player() == true)) {
+			
+			if (!_mode && (s->isInvader == false)) {
 				continue;
 			}
-			if (_mode && (s->is_player() == false)) {
+			if (_mode && (s->isInvader == true)) {
 				continue;
 			}
 			if (!s->is_exploded() && s->getGlobalBounds().intersects(boundingBox)) {
@@ -54,3 +55,20 @@ void Bullet::_Update(const float& dt) {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+//if (!_mode && (s->is_player() == true)) {
+			//	continue;
+			//}
+			//if (_mode && (s->is_player() == false)) {
+			//	continue;
+			//}

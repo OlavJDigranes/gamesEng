@@ -10,6 +10,7 @@ protected:
     Ship();
     bool _exploded = false;
     bool _player = false;
+    
 public:
     //Constructor that takes a sprite
     explicit Ship(sf::IntRect ir);
@@ -20,7 +21,7 @@ public:
     virtual void moveDown();
     bool is_exploded() const;
     virtual void Explode();
-    bool is_player();
+    bool isInvader;
 };
 
 class Invader : public Ship {
@@ -37,5 +38,11 @@ class Player : public Ship {
 public:
     Player();
     void Update(const float& dt) override;
+    //static bool isPlayer;
 };
 
+
+
+
+
+//bool is_player();
