@@ -56,19 +56,3 @@ void Bullet::_Update(const float& dt) {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-//if (!_mode && (s->is_player() == true)) {
-			//	continue;
-			//}
-			//if (_mode && (s->is_player() == false)) {
-			//	continue;
-			//}
