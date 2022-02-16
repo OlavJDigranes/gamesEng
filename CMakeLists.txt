@@ -42,3 +42,14 @@ set_target_properties(2_INVADERS
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
 )
 add_dependencies(2_INVADERS copy_resources)
+
+#### 4_tile_engine ####
+file(GLOB_RECURSE SOURCES 4_tile_engine/*.cpp 4_tile_engine/*.h)
+add_executable(4_TILE_ENGINE ${SOURCES} )
+target_include_directories(4_TILE_ENGINE SYSTEM PRIVATE ${SFML_INCS})
+target_link_libraries(4_TILE_ENGINE sfml-graphics)
+set_target_properties(4_TILE_ENGINE 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+add_dependencies(4_TILE_ENGINE copy_resources)
