@@ -54,3 +54,19 @@ int main() {
 	}
 	return 0;
 }
+
+/*
+Disallow player from moving onty tile type
+	- if (tile = wall) {disallow movement}
+	- if (tile = enemy) {reset player}
+
+Set player to start tile:
+	- Get tile pos as vec2f
+	- set player pos to tile pos
+
+End game
+	- if (player.pos == endtile.pos) {exit game, print congrats to console}
+
+Timer
+	- start at load, end at end
+*/

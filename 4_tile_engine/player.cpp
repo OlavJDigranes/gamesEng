@@ -35,10 +35,12 @@ void Player::Update(double dt) {
 Player::Player()
     : _speed(200.0f), Entity(make_unique<CircleShape>(25.f)) {
     _shape->setFillColor(Color::Magenta);
-    _shape->setOrigin(Vector2f(20.f, 20.f));
+    _shape->setOrigin(Vector2f(25.f, 25.f));
+	//setPosition(ls::getTilePosition()); 
     //_shape->setOrigin(ls::getTilePosition());
 }
 
 void Player::Render(sf::RenderWindow& window) const {
     window.draw(*_shape);
 }
+

@@ -97,6 +97,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 Vector2f LevelSystem::getTilePosition(Vector2ul p) {
     return (Vector2f(p.x, p.y) * _tileSize);
 }
+
 void LevelSystem::buildSprites() {
     _sprites.clear();
     for (size_t y = 0; y < LevelSystem::getHeight(); ++y) {
