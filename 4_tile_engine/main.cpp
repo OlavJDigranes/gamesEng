@@ -10,7 +10,7 @@ using namespace std;
 unique_ptr<Player> player;
 
 void Load() {
-	player = make_unique<Player>();
+	
 	ls::loadLevelFile("res/levels/maze.txt");
 
 	// Print the level to the console
@@ -20,6 +20,8 @@ void Load() {
 		}
 		cout << endl;
 	}
+
+	player = make_unique<Player>();
 }
 
 void Update(RenderWindow& window) {
@@ -35,8 +37,10 @@ void Update(RenderWindow& window) {
 }
 
 void Render(RenderWindow& window) {
-	player->Render(window);
 	ls::Render(window);
+
+	player->Render(window);
+	
 }
 
 int main() {
