@@ -11,6 +11,15 @@ unique_ptr<Player> player;
 
 void Load() {
 	player = make_unique<Player>();
+	ls::loadLevelFile("res/levels/maze.txt");
+
+	// Print the level to the console
+	for (size_t y = 0; y < ls::getHeight(); ++y) {
+		for (size_t x = 0; x < ls::getWidth(); ++x) {
+			cout << ls::getTile({ x, y });
+		}
+		cout << endl;
+	}
 }
 
 void Update(RenderWindow& window) {
@@ -27,6 +36,7 @@ void Update(RenderWindow& window) {
 
 void Render(RenderWindow& window) {
 	player->Render(window);
+	ls::Render(window);
 }
 
 int main() {
