@@ -27,6 +27,10 @@ public:
     static size_t getWidth();
     static size_t getHeight();
 
+    //Start tile pos
+    static sf::Vector2f startPos; 
+    static sf::Vector2f getStartPos();
+
 protected:
     static std::unique_ptr<TILE[]> _tiles; //Internal array of tiles
     static size_t _width; //how many tiles wide is level

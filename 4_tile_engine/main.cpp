@@ -13,6 +13,8 @@ void Load() {
 	
 	ls::loadLevelFile("res/levels/maze.txt");
 
+	Vector2f p = ls::getStartPos(); 
+
 	// Print the level to the console
 	for (size_t y = 0; y < ls::getHeight(); ++y) {
 		for (size_t x = 0; x < ls::getWidth(); ++x) {
@@ -22,6 +24,8 @@ void Load() {
 	}
 
 	player = make_unique<Player>();
+
+	player->setPosition(p);
 }
 
 void Update(RenderWindow& window) {
@@ -44,7 +48,7 @@ void Render(RenderWindow& window) {
 }
 
 int main() {
-	RenderWindow window(VideoMode(gameWidth, gameHeight), "TILE ENG");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "TILE ENGINE");
 	Load();
 	while (window.isOpen()) {
 		window.clear();

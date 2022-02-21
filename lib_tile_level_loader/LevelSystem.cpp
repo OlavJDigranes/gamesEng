@@ -10,6 +10,7 @@ std::unique_ptr<LevelSystem::TILE[]> LevelSystem::_tiles;
 size_t LevelSystem::_width;
 size_t LevelSystem::_height;
 Vector2f LevelSystem::_offset(0.0f, 0.0f);
+Vector2f LevelSystem::startPos;
 
 float LevelSystem::_tileSize(100.f);
 vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
@@ -51,6 +52,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
     }
 
     std::vector<TILE> temp_tiles;
+    int startIndex; 
     for (int i = 0; i < buffer.size(); ++i) {
         const char c = buffer[i];
         switch (c) {
@@ -59,6 +61,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
             break;
         case 's':
             temp_tiles.push_back(START);
+            startIndex = i; 
             break;
         case 'e':
             temp_tiles.push_back(END);
@@ -79,20 +82,28 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
             h++; // increment height
             break;
         default:
-            cout << c << endl; // Don't know what this tile type is
+            std::cout << c << endl; // Don't know what this tile type is
         }
     }
     if (temp_tiles.size() != (w * h)) {
         throw string("Can't parse level file") + path;
     }
+
     _tiles = std::make_unique<TILE[]>(w * h);
     _width = w; //set static class vars
     _height = h;
+
+    //Set start index
+    startPos = Vector2f((startIndex%w) * 50, (startIndex/h)* 50);
+
     std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
-    cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
+    std::cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
     buildSprites();
 }
 
+Vector2f LevelSystem::getStartPos() {
+    return startPos; 
+}
 
 Vector2f LevelSystem::getTilePosition(Vector2ul p) {
     return (Vector2f(p.x, p.y) * _tileSize);
