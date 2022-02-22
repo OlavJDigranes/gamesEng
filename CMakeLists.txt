@@ -64,3 +64,14 @@ set_target_properties(4_TILE_ENGINE
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
 )
 add_dependencies(4_TILE_ENGINE copy_resources)
+
+#### 5_pacman ####
+file(GLOB_RECURSE SOURCES 5_pacman/*.cpp 5_pacman/*.h)
+add_executable(5_PACMAN ${SOURCES})
+target_include_directories(5_PACMAN SYSTEM PRIVATE ${SFML_INCS})
+target_link_libraries(5_PACMAN lib_maths lib_tile_level_loader sfml-graphics)
+set_target_properties(5_PACMAN 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+add_dependencies(5_PACMAN copy_resources)
