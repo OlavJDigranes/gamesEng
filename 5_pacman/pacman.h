@@ -17,3 +17,16 @@ public:
 	void Render() override;
 	void Load() override;
 };
+
+class GameScene : public Scene {
+private:
+  sf::Text text;
+  sf::Clock scoreClock;
+  void respawn();
+
+public:
+  GameScene() = default;
+  void update(double dt) override;
+  void render() override;
+  void load() override;
+};
