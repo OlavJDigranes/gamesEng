@@ -9,14 +9,22 @@ using namespace sf;
 using namespace std;
 
 void Load() {
-
+    // Load Scene-Local Assets
+    gameScene.reset(new GameScene());
+    menuScene.reset(new MenuScene());
+    gameScene->load();
+    menuScene->load();
+    // Start at main menu
+    activeScene = menuScene;
 }
 
 void Update(RenderWindow& window) {
 	// Get delta time
 	static Clock clock;
 	double dt = clock.restart().asSeconds();
-	passedTime += dt;
+
+    activeScene->update(dt);
+	//passedTime += dt;
 
 	// ESC quit
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -25,6 +33,7 @@ void Update(RenderWindow& window) {
 }
 
 void Render(RenderWindow& window) {
+    activeScene->render();
 	// Render entities with entity manager
 	Renderer::Render();
 }
