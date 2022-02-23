@@ -12,8 +12,8 @@ void Load() {
     // Load Scene-Local Assets
     gameScene.reset(new GameScene());
     menuScene.reset(new MenuScene());
-    gameScene->load();
-    menuScene->load();
+    gameScene->Load();
+    menuScene->Load();
 	
     // Start at main menu
     activeScene = menuScene;
@@ -24,7 +24,7 @@ void Update(RenderWindow& window) {
 	static Clock clock;
 	double dt = clock.restart().asSeconds();
 
-    activeScene->update(dt);
+    activeScene->Update(dt);
 	//passedTime += dt;
 
 	// ESC quit
@@ -34,14 +34,14 @@ void Update(RenderWindow& window) {
 }
 
 void Render(RenderWindow& window) {
-    activeScene->render();
+    activeScene->Render();
 	// Render entities with entity manager
-	Renderer::Render();
+	Renderer::render();
 }
 
 int main(){
 	RenderWindow window(VideoMode(gameWidth, gameHeight), "P A C - M A N");
-	Renderer::Intialise(window);
+	Renderer::initialise(window);
 	Load();
 	while (window.isOpen()) {
 		window.clear();

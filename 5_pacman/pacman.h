@@ -20,13 +20,16 @@ public:
 
 class GameScene : public Scene {
 private:
-  sf::Text text;
-  sf::Clock scoreClock;
-  void respawn();
+	Text text;
+	Clock scoreClock;
+	Font font;
+	void Respawn();
+	shared_ptr<Entity> player;
+	vector<shared_ptr<Entity>> ghosts;
 
 public:
-  GameScene() = default;
-  void update(double dt) override;
-  void render() override;
-  void load() override;
+	GameScene() = default;
+	void Update(double dt) override;
+	void Render() override;
+	void Load() override;
 };
