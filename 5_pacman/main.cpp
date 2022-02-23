@@ -14,6 +14,7 @@ void Load() {
     menuScene.reset(new MenuScene());
     gameScene->load();
     menuScene->load();
+	
     // Start at main menu
     activeScene = menuScene;
 }
