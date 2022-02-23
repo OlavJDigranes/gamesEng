@@ -32,6 +32,12 @@ add_library(lib_tile_level_loader STATIC ${SOURCE_FILES})
 target_include_directories(lib_tile_level_loader INTERFACE "${CMAKE_SOURCE_DIR}/lib_tile_level_loader/" )
 target_link_libraries(lib_tile_level_loader lib_maths sfml-graphics)
 
+## ECM Lib ##
+file(GLOB_RECURSE SOURCE_FILES lib_ecm/*.cpp lib_ecm/*.h)
+add_library(lib_ecm STATIC ${SOURCE_FILES})
+target_include_directories(lib_ecm INTERFACE "${CMAKE_SOURCE_DIR}/lib_ecm" )
+target_link_libraries(lib_ecm PRIVATE lib_maths)
+
 #### Practical 1 ####
 file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
 add_executable(PRACTICAL_1 ${SOURCES})
@@ -69,7 +75,7 @@ add_dependencies(4_TILE_ENGINE copy_resources)
 file(GLOB_RECURSE SOURCES 5_pacman/*.cpp 5_pacman/*.h)
 add_executable(5_PACMAN ${SOURCES})
 target_include_directories(5_PACMAN SYSTEM PRIVATE ${SFML_INCS})
-target_link_libraries(5_PACMAN lib_maths lib_tile_level_loader sfml-graphics)
+target_link_libraries(5_PACMAN lib_ecm lib_maths lib_tile_level_loader sfml-graphics)
 set_target_properties(5_PACMAN 
     PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)

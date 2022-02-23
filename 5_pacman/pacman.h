@@ -1,7 +1,11 @@
 //pacman.h
 #pragma once
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include "scene.h"
+
+using namespace std;
+using namespace sf;
 
 extern std::shared_ptr<Scene> gameScene;
 extern std::shared_ptr<Scene> menuScene;

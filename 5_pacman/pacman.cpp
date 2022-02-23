@@ -1,7 +1,7 @@
 #include "pacman.h"
 #include "system_renderer.h"
 #include "game.h"
-//#include "cmp_sprite.h"
+#include "cmp_sprite.h"
 //#include "cmp_actor_movement.h"
 #include "LevelSystem.h"
 //#include "cmp_enemy.h"
@@ -48,10 +48,10 @@ void GameScene::Load(){
 	
 	// Create player
 	auto plr = make_shared<Entity>();
-	//auto s = player->addComponent<ShapeComponent>();
-	//s->setShape<sf::CircleShape>(12.f);
-	//s->getShape().setFillColor(Color::Yellow);
-	//s->getShape().setOrigin(Vector2f(12.f, 12.f));
+	auto s = player->addComponent<ShapeComponent>();
+	s->setShape<sf::CircleShape>(12.f);
+	s->getShape().setFillColor(Color::Yellow);
+	s->getShape().setOrigin(Vector2f(12.f, 12.f));
 	//player->addComponent<PlayerMovementComponent>();
 	_ents.list.push_back(move(plr));
 	player = _ents.list[_ents.list.size()-1];
@@ -65,10 +65,10 @@ void GameScene::Load(){
 
 	for (int i = 0; i < GHOSTS_COUNT; i++) {
 		auto ghost = make_shared<Entity>();
-		//auto s1 = ghost->addComponent<ShapeComponent>();
-		//s1->setShape<sf::CircleShape>(12.f);
-		//s1->getShape().setFillColor(ghost_cols[i % 4]);
-		//s1->getShape().setOrigin(Vector2f(12.f, 12.f));
+		auto s1 = ghost->addComponent<ShapeComponent>();
+		s1->setShape<sf::CircleShape>(12.f);
+		s1->getShape().setFillColor(ghost_cols[i % 4]);
+		s1->getShape().setOrigin(Vector2f(12.f, 12.f));
 		//ghost->addComponent<EnemyAIComponent>();
 		_ents.list.push_back(ghost);
 		ghosts.push_back(_ents.list[_ents.list.size() - 1]);

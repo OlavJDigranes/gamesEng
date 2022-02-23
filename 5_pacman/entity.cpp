@@ -1,3 +1,4 @@
+/*
 #include "entity.h"
 #include "game.h"
 #include "system_renderer.h"
@@ -6,16 +7,15 @@
 using namespace std;
 using namespace sf;
 
-Entity::Entity(unique_ptr<Shape> s) : _shape(std::move(s)) {}
-
 // EntityManager
 void EntityManager::Render(sf::RenderWindow& window) {
 	for (const auto& e : list) {
-		e->Render(window);
+		e->render();
 	}
 }
 void EntityManager::Update(double dt) {
 	for (auto& e : list) {
-		e->Update(dt);
+		e->update(dt);
 	}
 }
+*/

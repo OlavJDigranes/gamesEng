@@ -1,5 +1,6 @@
 //scene.h
-#include "Entity.h"
+//#include "Entity.h"
+#include "ecm.h"
 
 using namespace std;
 
