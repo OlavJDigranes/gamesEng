@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "entity.h"
+#include "ecm.h"
 #include "game.h"
 #include "system_renderer.h"
 #include "pacman.h"
@@ -8,12 +8,14 @@
 using namespace sf;
 using namespace std;
 
+double timePassed = 0.0; 
+
 void Load() {
     // Load Scene-Local Assets
     gameScene.reset(new GameScene());
     menuScene.reset(new MenuScene());
-    gameScene->Load();
-    menuScene->Load();
+    gameScene->load();
+    menuScene->load();
 	
     // Start at main menu
     activeScene = menuScene;
@@ -24,8 +26,8 @@ void Update(RenderWindow& window) {
 	static Clock clock;
 	double dt = clock.restart().asSeconds();
 
-    activeScene->Update(dt);
-	//passedTime += dt;
+    activeScene->update(dt);
+	timePassed += dt;
 
 	// ESC quit
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -34,13 +36,12 @@ void Update(RenderWindow& window) {
 }
 
 void Render(RenderWindow& window) {
-    activeScene->Render();
-	// Render entities with entity manager
+    activeScene->render();
 	Renderer::render();
 }
 
 int main(){
-	RenderWindow window(VideoMode(gameWidth, gameHeight), "P A C - M A N");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "PAC - MAN");
 	Renderer::initialise(window);
 	Load();
 	while (window.isOpen()) {

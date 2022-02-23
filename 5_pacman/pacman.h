@@ -13,27 +13,28 @@ extern std::shared_ptr<Scene> activeScene;
 
 class MenuScene : public Scene {
 private:
-	Text text;
-	Font font;
+	sf::Text text;
+	sf::Font font;
+
 public:
 	MenuScene() = default;
-	void Update(double dt) override;
-	void Render() override;
-	void Load() override;
+	void update(double dt) override;
+	void render() override;
+	void load() override;
 };
 
 class GameScene : public Scene {
 private:
-	Text text;
-	Clock scoreClock;
-	Font font;
-	void Respawn();
-	shared_ptr<Entity> player;
-	vector<shared_ptr<Entity>> ghosts;
+	sf::Text text;
+	sf::Clock scoreClock;
+	sf::Font font;
+	void respawn();
+	std::shared_ptr<Entity> player;
+	std::vector<shared_ptr<Entity>> ghosts;
 
 public:
 	GameScene() = default;
-	void Update(double dt) override;
-	void Render() override;
-	void Load() override;
+	void update(double dt) override;
+	void render() override;
+	void load() override;
 };

@@ -2,6 +2,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+
 namespace Renderer {
     void initialise(sf::RenderWindow &);
     sf::RenderWindow &getWindow();

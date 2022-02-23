@@ -1,11 +1,15 @@
 #include "pacman.h"
 #include "system_renderer.h"
 #include "game.h"
+#include "LevelSystem.h"
+#include "ecm.h"
 #include "cmp_sprite.h"
 //#include "cmp_actor_movement.h"
-#include "LevelSystem.h"
 //#include "cmp_enemy.h"
 //#include "cmp_pickup.h"
+
+//using namespace std;
+//using namespace sf;
 
 #define GHOSTS_COUNT 4
 
@@ -14,20 +18,20 @@ shared_ptr<Scene> menuScene;
 shared_ptr<Scene> activeScene;
 
 //Menu Scene
-void MenuScene::Update(double dt) {
+void MenuScene::update(double dt) {
   if (Keyboard::isKeyPressed(Keyboard::Space)) {
         activeScene = gameScene;
     }
-    Scene::Update(dt);
+    Scene::update(dt);
     text.setString("Almost Pacman");
 }
 
-void MenuScene::Render() {
+void MenuScene::render() {
   Renderer::queue(&text);
-  Scene::Render();
+  Scene::render();
 }
 
-void MenuScene::Load() {
+void MenuScene::load() {
 	font.loadFromFile("res/fonts/RobotoMono-Bold.ttf");
 	text.setFont(font);
 	text.setCharacterSize(30);
@@ -35,7 +39,7 @@ void MenuScene::Load() {
 }
 
 //Game Scene
-void GameScene::Load(){
+void GameScene::load(){
 	font.loadFromFile("res/fonts/RobotoMono-Bold.ttf");
 	text.setFont(font);
 	text.setCharacterSize(30);
@@ -59,9 +63,9 @@ void GameScene::Load(){
 
 	// Create ghosts
 	const Color ghost_cols[]{ {208, 62, 25},    // red Blinky
-							              {219, 133, 28},   // orange Clyde
-							              {70, 191, 238},   // cyan Inky
-							              {234, 130, 229} }; // pink Pinky
+							  {219, 133, 28},   // orange Clyde
+							  {70, 191, 238},   // cyan Inky
+							  {234, 130, 229} }; // pink Pinky
 
 	for (int i = 0; i < GHOSTS_COUNT; i++) {
 		auto ghost = make_shared<Entity>();
@@ -74,19 +78,25 @@ void GameScene::Load(){
 		ghosts.push_back(_ents.list[_ents.list.size() - 1]);
 	}
 
-	this->Respawn();
+	this->respawn();
 }
 
 // Game Scene
-void GameScene::Update(double dt) {
+void GameScene::update(double dt) {
 	if (Keyboard::isKeyPressed(Keyboard::Tab)) {
 		activeScene = menuScene;
 	}
-	Scene::Update(dt);
+	Scene::update(dt);
 
 	for (auto& g : ghosts) {
 		if (length(g->getPosition() - player->getPosition()) < 30.0f) {
-			Respawn();
+			respawn();
 		}
 	}
+}
+
+void GameScene::render() {
+	ls::Render(Renderer::getWindow());
+	Renderer::queue(&text);
+	Scene::render();
 }
