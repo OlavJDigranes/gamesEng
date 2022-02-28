@@ -10,7 +10,7 @@ std::unique_ptr<LevelSystem::TILE[]> LevelSystem::_tiles;
 size_t LevelSystem::_width;
 size_t LevelSystem::_height;
 Vector2f LevelSystem::_offset(0.0f, 0.0f);
-Vector2f LevelSystem::startPos;
+//Vector2f LevelSystem::startPos;
 
 float LevelSystem::_tileSize(100.f);
 vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
@@ -94,16 +94,16 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
     _height = h;
 
     //Set start index
-    startPos = Vector2f((startIndex%w) * 50, (startIndex/h)* 50);
+    //startPos = Vector2f((startIndex%w) * 50, (startIndex/h)* 50);
 
     std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
     std::cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
     buildSprites();
 }
 
-Vector2f LevelSystem::getStartPos() {
-    return startPos; 
-}
+//Vector2f LevelSystem::getStartPos() {
+//    return startPos; 
+//}
 
 Vector2f LevelSystem::getTilePosition(Vector2ul p) {
     return (Vector2f(p.x, p.y) * _tileSize);

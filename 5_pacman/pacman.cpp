@@ -47,12 +47,12 @@ void GameScene::load(){
 	text.setString("PAC-MAN");
 
   // Load the level
-	ls::loadLevelFile("res/pacman.txt", 25.0f);
+	ls::loadLevelFile("res/levels/pacman.txt", 25.0f);
 
 	
 	// Create player
 	auto plr = make_shared<Entity>();
-	auto s = player->addComponent<ShapeComponent>();
+	auto s = plr->addComponent<ShapeComponent>();
 	s->setShape<sf::CircleShape>(12.f);
 	s->getShape().setFillColor(Color::Yellow);
 	s->getShape().setOrigin(Vector2f(12.f, 12.f));
@@ -100,3 +100,5 @@ void GameScene::render() {
 	Renderer::queue(&text);
 	Scene::render();
 }
+
+//TODO: Add the respawn() function in this file. 

@@ -28,8 +28,8 @@ public:
     static size_t getHeight();
 
     //Start tile pos
-    static sf::Vector2f startPos; 
-    static sf::Vector2f getStartPos();
+    //static sf::Vector2f startPos; 
+    //static sf::Vector2f getStartPos();
 
 protected:
     static std::unique_ptr<TILE[]> _tiles; //Internal array of tiles
