@@ -109,6 +109,10 @@ Vector2f LevelSystem::getTilePosition(Vector2ul p) {
     return (Vector2f(p.x, p.y) * _tileSize);
 }
 
+Vector2f LevelSystem::getTileOrigin(Vector2ul p) {
+    return (Vector2f(p.x, p.y)) * _tileSize + Vector2f(_tileSize, _tileSize) * 0.5f;
+}
+
 std::vector<sf::Vector2ul> LevelSystem::findTiles(LevelSystem::TILE type) {
     auto v = vector<sf::Vector2ul>();
     for (size_t i = 0; i < _width * _height; ++i) {
