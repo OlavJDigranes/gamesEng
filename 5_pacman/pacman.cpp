@@ -102,3 +102,13 @@ void GameScene::render() {
 }
 
 //TODO: Add the respawn() function in this file. 
+void GameScene::respawn() {
+	player->setPosition(ls::getTileOrigin(ls::findTiles(ls::START)[0]));
+	//player->GetCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(150.f);
+
+	auto ghost_spawns = ls::findTiles(ls::ENEMY);
+	for (auto& g : ghosts) {
+		g->setPosition(ls::getTileOrigin(ghost_spawns[rand() % ghost_spawns.size()]));
+		//g->GetCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(100.0f);
+	}
+}
