@@ -20,3 +20,11 @@ public:
     void render() override {}
     void update(double dt) override;
 };
+
+class PlayerMovementComponent : public ActorMovementComponent {
+public:
+    PlayerMovementComponent(Entity* p);
+    PlayerMovementComponent() = delete;
+    ~PlayerMovementComponent() = default;
+    void update(double dt) override;
+};
