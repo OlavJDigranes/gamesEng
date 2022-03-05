@@ -3,6 +3,8 @@
 #include "maths.h"
 #include "cmp_actor_movement.h"
 
+//This can not be instantiated: ERROR 2259. Break points do not work. help. 
+
 PickupComponent::PickupComponent(Entity* p) : Component(p) {}
 
 void PickupComponent::update(double dt) {
