@@ -35,3 +35,47 @@ void ActorMovementComponent::move(const Vector2f& p) {
 	_parent->setPosition(pp);
 }
 
+// Player Movement Component
+PlayerMovementComponent::PlayerMovementComponent(Entity* p) : ActorMovementComponent(p) {}
+
+void PlayerMovementComponent::update(double dt) {
+	if (_parent->isAlive()) {
+		Vector2f direction = { 0.f, 0.f };
+		if (Keyboard::isKeyPressed(Keyboard::A)) {
+			direction.x = -_speed * dt;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D)) {
+			direction.x = _speed * dt;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S)) {
+			direction.y = _speed * dt;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::W)) {
+			direction.y = -_speed * dt;
+		}
+
+		if (_parent->getPosition().x - 15.f > 0 &&
+			_parent->getPosition().x + 15.f < gameWidth &&
+			_parent->getPosition().y - 15.f > 0 &&
+			_parent->getPosition().y + 15.f < gameHeight) 
+		{
+
+			move(direction);
+		}
+		else {
+			if (_parent->getPosition().x - 15.f <= 0 && direction.x < 0) {
+				direction.x = 0;
+			}
+			else if (_parent->getPosition().x + 15.f >= gameWidth && direction.x > 0) {
+				direction.x = 0;
+			}
+			if (_parent->getPosition().y - 15.f <= 0 && direction.y < 0) {
+				direction.y = 0;
+			}
+			else if (_parent->getPosition().y + 15.f >= gameHeight && direction.y > 0) {
+				direction.y = 0;
+			}
+			move(direction);
+		}
+	}
+}

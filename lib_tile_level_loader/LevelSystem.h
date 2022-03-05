@@ -28,6 +28,7 @@ public:
     static size_t getHeight();
     static std::vector<sf::Vector2ul> findTiles(TILE);
     static sf::Vector2f getTileOrigin(sf::Vector2ul);
+    static float getTileSize();
 
     //Start tile pos
     //static sf::Vector2f startPos; 

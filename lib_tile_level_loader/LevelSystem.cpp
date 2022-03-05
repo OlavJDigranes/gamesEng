@@ -157,3 +157,5 @@ void LevelSystem::Render(RenderWindow& window) {
         window.draw(*_sprites[i]);
     }
 }
+
+float LevelSystem::getTileSize() { return _tileSize; }
