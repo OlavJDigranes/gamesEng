@@ -3,9 +3,7 @@
 #include "maths.h"
 #include "cmp_actor_movement.h"
 
-//This can not be instantiated: ERROR 2259. Break points do not work. help. 
-
-PickupComponent::PickupComponent(Entity* p) : Component(p) {}
+PickupComponent::PickupComponent(Entity* p, bool big) : Component(p) {  }
 
 void PickupComponent::update(double dt) {
 	
@@ -19,12 +17,14 @@ void PickupComponent::update(double dt) {
 			//if it has one
 			if (movementCmp.size() > 0) {
 				movementCmp[0]->setSpeed(movementCmp[0]->getSpeed() + _points); // speed up entity
-				_parent->setForDelete(); //kill myself
+				_parent->setForDelete(); //nibble: kill itself
 				break; // stop looking
 			}
 		}
 	}
 }
+
+void PickupComponent::render() { }
 
 float PickupComponent::getPoints() {
 	return _points;

@@ -23,7 +23,9 @@ vector<shared_ptr<Entity>> nibbles;
 shared_ptr<Entity> makeNibble(const Vector2ul& nl, bool big) {
 	auto cherry = make_shared<Entity>();
 	auto s = cherry->addComponent<ShapeComponent>();
+	s->setShape<sf::CircleShape>(12.f);
 	s->getShape().setFillColor(Color::White);
+	s->getShape().setOrigin(Vector2f(12.f, 12.f));
 	cherry->addComponent<PickupComponent>(big);
 	cherry->setPosition(ls::getTilePosition(nl) + Vector2f(10.f, 10.f));
 	return cherry;
@@ -61,15 +63,13 @@ void GameScene::load(){
   // Load the level
 	ls::loadLevelFile("res/levels/pacman.txt", 25.0f);
 
-	//TODO MAY BE PROBELM HERE WITH player
-
 	// Create player
 	auto plr = make_shared<Entity>();
 	auto s = plr->addComponent<ShapeComponent>();
 	s->setShape<sf::CircleShape>(12.f);
 	s->getShape().setFillColor(Color::Yellow);
 	s->getShape().setOrigin(Vector2f(12.f, 12.f));
-	player->addComponent<PlayerMovementComponent>();
+	plr->addComponent<PlayerMovementComponent>();
 	_ents.list.push_back(move(plr));
 	player = _ents.list[_ents.list.size()-1];
 	

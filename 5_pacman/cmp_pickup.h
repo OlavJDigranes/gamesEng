@@ -10,13 +10,13 @@ protected:
 	float _points = 1.f;
 
 public:
-	explicit PickupComponent(Entity* p);
+	explicit PickupComponent(Entity* p, bool big);
 	PickupComponent() = delete;
 	~PickupComponent() = default;
 
 	float getPoints();
 	void setPoints(float new_points);
 
-	void Render() {}
+	void render() override; 
 	void update(double dt) override;
 };
