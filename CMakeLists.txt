@@ -21,6 +21,12 @@ add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND}
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
 )
 
+## B2D - Box2D phyics library
+add_subdirectory("lib/b2d/Box2D")
+#include_directories("lib/b2d/Box2D/")
+set(B2D_INCS "lib/b2d/Box2D/")
+link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
+
 ## Maths lib
 add_library(lib_maths INTERFACE)
 target_sources(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths/maths.h")
@@ -81,3 +87,11 @@ set_target_properties(5_PACMAN
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
 )
 add_dependencies(5_PACMAN copy_resources)
+
+#### 6_physics ####
+## physics
+file(GLOB_RECURSE SOURCES 6_physics/*.cpp 6_physics/*.h)
+add_executable(6_PHYSICS ${SOURCES})
+target_include_directories(6_PHYSICS SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
+target_link_libraries(6_PHYSICS Box2D sfml-graphics)
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_6_PHYSICS)
