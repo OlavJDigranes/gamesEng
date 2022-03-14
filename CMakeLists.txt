@@ -27,6 +27,13 @@ add_subdirectory("lib/b2d/Box2D")
 set(B2D_INCS "lib/b2d/Box2D/")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
+file(GLOB_RECURSE RESOURCE_FILES "res/*.*")
+#### Lib Enging
+file(GLOB_RECURSE SOURCE_FILES lib_engine/*.cpp lib_engine/*.h)
+add_library(lib_engine STATIC ${SOURCE_FILES} ${RESOURCE_FILES})
+target_include_directories(lib_engine INTERFACE "${CMAKE_SOURCE_DIR}/lib_engine/" PUBLIC SYSTEM ${B2D_INCS} )
+target_link_libraries(lib_engine lib_tile_level_loader lib_maths lib_ecm Box2D sfml-graphics sfml-audio)
+
 ## Maths lib
 add_library(lib_maths INTERFACE)
 target_sources(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths/maths.h")
@@ -95,3 +102,14 @@ add_executable(6_PHYSICS ${SOURCES})
 target_include_directories(6_PHYSICS SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 target_link_libraries(6_PHYSICS Box2D sfml-graphics)
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_6_PHYSICS)
+
+#### 7_platformer ####
+file(GLOB_RECURSE SOURCES 7_platformer/*.cpp 7_platformer/*.h)
+file(GLOB_RECURSE CMPNTS 7_platformer/components/*.cpp 7_platformer/components/*.h)
+file(GLOB_RECURSE SCENES 7_platformer/scenes/*.cpp 7_platformer/scenes/*.h)
+add_executable(7_PLATFORMER ${SOURCES} ${RESOURCE_FILES})
+source_group("components" FILES ${CMPNTS})
+source_group("resources" FILES ${RESOURCE_FILES})
+#target_include_directories(7_PLATFORMER SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
+target_link_libraries(7_PLATFORMER lib_engine)
+set(EXECUTABLES ${EXECUTABLES} 7_PLATFORMER)

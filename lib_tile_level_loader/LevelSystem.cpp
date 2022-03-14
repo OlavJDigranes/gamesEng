@@ -158,4 +158,18 @@ void LevelSystem::Render(RenderWindow& window) {
     }
 }
 
+void LevelSystem::setOffset(const Vector2f& _offset) {
+    LevelSystem::_offset = _offset;
+    buildSprites();
+}
+
+void LevelSystem::unload() {
+    cout << "LevelSystem unloading\n";
+    _sprites.clear();
+    _tiles.reset();
+    _width = 0;
+    _height = 0;
+    _offset = { 0, 0 };
+}
+
 float LevelSystem::getTileSize() { return _tileSize; }

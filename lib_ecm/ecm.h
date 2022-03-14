@@ -8,7 +8,7 @@
 #include <vector>
 
 class Component; //forward declare
-//class Scene; 
+class Scene; 
 
 class Entity {
 friend struct EntityManager;
@@ -25,9 +25,9 @@ protected:
 public:
     void addTag(const std::string& t);
     const std::set<std::string>& getTags() const;
-    //Scene* const scene;
-    Entity(); 
-    //Entity(Scene* const s);
+    Scene* const scene;
+    //Entity(); 
+    Entity(Scene* const s);
 
     virtual ~Entity();
     virtual void update(double dt);

@@ -29,7 +29,8 @@ public:
     static std::vector<sf::Vector2ul> findTiles(TILE);
     static sf::Vector2f getTileOrigin(sf::Vector2ul);
     static float getTileSize();
-
+    static void setOffset(const sf::Vector2f& _offset);
+    static void unload();
     //Start tile pos
     //static sf::Vector2f startPos; 
     //static sf::Vector2f getStartPos();

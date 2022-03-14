@@ -5,6 +5,8 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <iomanip>
 
 namespace sf {
     //Create a definition for a sf::vector using size_t types
@@ -45,5 +47,13 @@ namespace sf {
     std::ostream& operator<<(std::ostream& os, const Vector2<T>& v) {
         os << '(' << v.x << ',' << v.y << ')';
         return os;
+    }
+
+    //toStrDecPt
+    template <typename T>
+    std::string toStrDecPt(const uint16_t& dp, const T& i) {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(dp) << i;
+        return stream.str();
     }
 }
