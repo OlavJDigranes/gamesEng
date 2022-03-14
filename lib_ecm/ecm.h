@@ -25,6 +25,8 @@ protected:
 public:
     void addTag(const std::string& t);
     const std::set<std::string>& getTags() const;
+
+    //SCENE IMPLEMENTED: Must pass scene to all entities. 
     Scene* const scene;
     //Entity(); 
     Entity(Scene* const s);
