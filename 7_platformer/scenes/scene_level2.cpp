@@ -21,10 +21,12 @@ void Level2Scene::Load() {
   {
     // *********************************
 
-
-
-
-
+      player = makeEntity();
+      player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+      auto s = player->addComponent<ShapeComponent>();
+      s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
+      s->getShape().setFillColor(Color::Magenta);
+      s->getShape().setOrigin(Vector2f(10.f, 15.f));
 
     // *********************************
     player->addTag("player");
@@ -38,21 +40,24 @@ void Level2Scene::Load() {
                        Vector2f(0, 24));
     // *********************************
     // Add HurtComponent
-
+    auto hurtComp = enemy->addComponent<HurtComponent>();
     // Add ShapeComponent, Red 16.f Circle
-
-
-
+    auto shapeComp = enemy->addComponent<ShapeComponent>();
+    shapeComp->setShape<sf::CircleShape>(16.f);
+    shapeComp->getShape().setFillColor(Color::Red);
+    shapeComp->getShape().setOrigin(Vector2f(8.f, 8.f));
 
     // Add EnemyAIComponent
-
+    auto enemyAIComp = enemy->addComponent<EnemyAIComponent>();
     // *********************************
   }
 
   // Create Turret
   {
     auto turret = makeEntity();
-    turret->setPosition(ls::getTilePosition(ls::findTiles('t')[0]) +
+
+    //t = TURRET
+    turret->setPosition(ls::getTilePosition(ls::findTiles(ls::TURRET)[0]) +
                         Vector2f(20, 0));
     auto s = turret->addComponent<ShapeComponent>();
     s->setShape<sf::CircleShape>(16.f, 3);
@@ -65,12 +70,14 @@ void Level2Scene::Load() {
   {
     // *********************************
 
-
-
-
-
-
-
+      auto wallzes = ls::findTiles(ls::WALL);
+      for (auto w : wallzes) {
+          auto posw = ls::getTilePosition(w);
+          posw += Vector2f(20.f, 20.f);
+          auto me = makeEntity();
+          me->setPosition(posw);
+          me->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
+      }
 
     // *********************************
   }

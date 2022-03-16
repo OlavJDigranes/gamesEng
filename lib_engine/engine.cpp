@@ -29,6 +29,7 @@ void Loading_update(float dt, const Scene* const scn) {
     loadingTime += dt;
   }
 }
+
 void Loading_render() {
   // cout << "Eng: Loading Screen Render\n";
   static CircleShape octagon(80, 8);
@@ -38,6 +39,8 @@ void Loading_render() {
   octagon.setFillColor(Color(255,255,255,min(255.f,40.f*loadingTime)));
   static Text t("Loading", *Resources::get<sf::Font>("RobotoMono-Regular.ttf"));
   t.setFillColor(Color(255,255,255,min(255.f,40.f*loadingTime)));
+  
+  //Change to Vector2 multiplication due to SFML API changes. 
   Vector2f temp = Vcast<float>(Engine::getWindowSize());
   temp.x = temp.x * 0.4f;
   temp.y = temp.y * 0.3f; 

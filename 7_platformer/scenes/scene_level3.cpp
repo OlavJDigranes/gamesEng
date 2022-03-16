@@ -23,7 +23,13 @@ void Level3Scene::Load() {
 
     // pl->setPosition({100, 100});
 
-
+      player = makeEntity();
+      player->setPosition({ 100, 100 });
+      auto s = player->addComponent<ShapeComponent>();
+      s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
+      s->getShape().setFillColor(Color::Magenta);
+      s->getShape().setOrigin(Vector2f(10.f, 15.f));
+      player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
 
 
 
@@ -36,10 +42,14 @@ void Level3Scene::Load() {
     // *********************************
 
 
-
-
-
-
+      auto wallzes = ls::findTiles(ls::WALL);
+      for (auto w : wallzes) {
+          auto posw = ls::getTilePosition(w);
+          posw += Vector2f(20.f, 20.f);
+          auto me = makeEntity();
+          me->setPosition(posw);
+          me->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
+      }
 
 
     // *********************************
@@ -73,7 +83,9 @@ void Level3Scene::Update(const double& dt) {
   if (rocktime <= 0.f){
     rocktime  = 5.f;
     auto rock = makeEntity();
-    rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
+
+    //r = ROTATOR
+    rock->setPosition(ls::getTilePosition(ls::findTiles(ls::ROTATOR)[0]) +
                       Vector2f(0, 40) );
     rock->addComponent<BulletComponent>(30.f);
     auto s = rock->addComponent<ShapeComponent>();
