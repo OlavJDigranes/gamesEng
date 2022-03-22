@@ -86,6 +86,7 @@ void Level3Scene::Update(const double& dt) {
         rocktime = 5.f;
         auto rock = makeEntity();
         rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
+        //rock->setPosition(ls::getTilePosition(ls::findTiles(ls::ROTATOR)[0]) +
             Vector2f(0, 40));
         rock->addComponent<BulletComponent>(30.f);
         auto s = rock->addComponent<ShapeComponent>();
@@ -102,6 +103,7 @@ void Level3Scene::Update(const double& dt) {
 }
 
 void Level3Scene::Render() {
+    //ls::Render(Engine::GetWindow());
     ls::render(Engine::GetWindow());
     Scene::Render();
 }

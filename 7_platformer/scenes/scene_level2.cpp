@@ -57,6 +57,7 @@ void Level2Scene::Load() {
     {
         auto turret = makeEntity();
         turret->setPosition(ls::getTilePosition(ls::findTiles('t')[0]) +
+        //turret->setPosition(ls::getTilePosition(ls::findTiles(ls::TURRET)[0]) +
             Vector2f(20, 0));
         auto s = turret->addComponent<ShapeComponent>();
         s->setShape<sf::CircleShape>(16.f, 3);
@@ -104,6 +105,7 @@ void Level2Scene::Update(const double& dt) {
 }
 
 void Level2Scene::Render() {
+    //ls::Render(Engine::GetWindow());
     ls::render(Engine::GetWindow());
     Scene::Render();
 }

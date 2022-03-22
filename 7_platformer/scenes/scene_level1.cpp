@@ -65,6 +65,7 @@ void Level1Scene::Update(const double& dt) {
 }
 
 void Level1Scene::Render() {
+    //ls::Render(Engine::GetWindow());
     ls::render(Engine::GetWindow());
     Scene::Render();
 }
