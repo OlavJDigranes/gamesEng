@@ -20,5 +20,5 @@ int main() {
     Could it be something about C++ std chnages, needing to inlcude something?
     */
 
-    Engine::Start(1280, 720, "Platformer",&menu);
+    Engine::Start(1920, 1080, "Platformer",&menu);
 }
