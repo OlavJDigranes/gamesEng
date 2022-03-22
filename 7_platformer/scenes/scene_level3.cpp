@@ -11,97 +11,97 @@ using namespace sf;
 static shared_ptr<Entity> player;
 
 void Level3Scene::Load() {
-  cout << "Scene 3 Load" << endl;
-  ls::loadLevelFile("res/level_3.txt", 40.0f);
-  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  ls::setOffset(Vector2f(0, ho));
+    cout << "Scene 3 Load" << endl;
+    ls::loadLevelFile("res/level_3.txt", 40.0f);
+    auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+    ls::setOffset(Vector2f(0, ho));
 
-  // Create player
-  {
-    // *********************************
-
-
-    // pl->setPosition({100, 100});
-
-      player = makeEntity();
-      player->setPosition({ 100, 100 });
-      auto s = player->addComponent<ShapeComponent>();
-      s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-      s->getShape().setFillColor(Color::Magenta);
-      s->getShape().setOrigin(Vector2f(10.f, 15.f));
-      player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+    // Create player
+    {
+        // *********************************
 
 
+        // pl->setPosition({100, 100});
+
+        player = makeEntity();
+        player->setPosition({ 100, 100 });
+        auto s = player->addComponent<ShapeComponent>();
+        s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
+        s->getShape().setFillColor(Color::Magenta);
+        s->getShape().setOrigin(Vector2f(10.f, 15.f));
+        player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
 
 
-    // *********************************
-  }
+        // *********************************
+    }
 
-  // Add physics colliders to level tiles.
-  {
-    // *********************************
-
-
-      auto wallzes = ls::findTiles(ls::WALL);
-      for (auto w : wallzes) {
-          auto posw = ls::getTilePosition(w);
-          posw += Vector2f(20.f, 20.f);
-          auto me = makeEntity();
-          me->setPosition(posw);
-          me->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
-      }
+    // Add physics colliders to level tiles.
+    {
+        // *********************************
 
 
-    // *********************************
-  }
 
-  cout << " Scene 3 Load Done" << endl;
-  setLoaded(true);
+
+        auto wallzes = ls::findTiles(ls::WALL);
+        for (auto w : wallzes) {
+            auto posw = ls::getTilePosition(w);
+            posw += Vector2f(20.f, 20.f);
+            auto me = makeEntity();
+            me->setPosition(posw);
+            me->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
+        }
+
+
+
+        // *********************************
+    }
+
+    cout << " Scene 3 Load Done" << endl;
+    setLoaded(true);
 }
 
 void Level3Scene::UnLoad() {
-  cout << "Scene 3 UnLoad" << endl;
-  player.reset();
-  ls::unload();
-  Scene::UnLoad();
+    cout << "Scene 3 UnLoad" << endl;
+    player.reset();
+    ls::unload();
+    Scene::UnLoad();
 }
 
 
 
 void Level3Scene::Update(const double& dt) {
-  Scene::Update(dt);
-  const auto pp = player->getPosition();
-  if (ls::getTileAt(pp) == ls::END) {
-    Engine::ChangeScene((Scene*)&level1);
-  } else if (!player->isAlive()) {
-    Engine::ChangeScene((Scene*)&level3);
-  }
+    Scene::Update(dt);
+    const auto pp = player->getPosition();
+    if (ls::getTileAt(pp) == ls::END) {
+        Engine::ChangeScene((Scene*)&level1);
+    }
+    else if (!player->isAlive()) {
+        Engine::ChangeScene((Scene*)&level3);
+    }
 
-  static float rocktime = 0.0f;
-  rocktime -= dt;
+    static float rocktime = 0.0f;
+    rocktime -= dt;
 
-  if (rocktime <= 0.f){
-    rocktime  = 5.f;
-    auto rock = makeEntity();
+    if (rocktime <= 0.f) {
+        rocktime = 5.f;
+        auto rock = makeEntity();
+        rock->setPosition(ls::getTilePosition(ls::findTiles(ls::ROTATOR)[0]) +
+            Vector2f(0, 40));
+        rock->addComponent<BulletComponent>(30.f);
+        auto s = rock->addComponent<ShapeComponent>();
+        s->setShape<sf::CircleShape>(40.f);
+        s->getShape().setFillColor(Color::Cyan);
+        s->getShape().setOrigin(Vector2f(40.f, 40.f));
+        auto p = rock->addComponent<PhysicsComponent>(true, Vector2f(75.f, 75.f));
+        p->setRestitution(.4f);
+        p->setFriction(.0001f);
+        p->impulse(Vector2f(-3.f, 0));
+        p->setMass(1000000000.f);
+    }
 
-    //r = ROTATOR
-    rock->setPosition(ls::getTilePosition(ls::findTiles(ls::ROTATOR)[0]) +
-                      Vector2f(0, 40) );
-    rock->addComponent<BulletComponent>(30.f);
-    auto s = rock->addComponent<ShapeComponent>();
-    s->setShape<sf::CircleShape>(40.f);
-    s->getShape().setFillColor(Color::Cyan);
-    s->getShape().setOrigin(Vector2f(40.f, 40.f));
-    auto p = rock->addComponent<PhysicsComponent>(true, Vector2f(75.f, 75.f));
-    p->setRestitution(.4f);
-    p->setFriction(.0001f);
-    p->impulse(Vector2f(-3.f, 0));
-    p->setMass(1000000000.f);
-  }
-  
 }
 
 void Level3Scene::Render() {
-  ls::Render(Engine::GetWindow());
-  Scene::Render();
+    ls::Render(Engine::GetWindow());
+    Scene::Render();
 }

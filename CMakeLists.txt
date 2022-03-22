@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 # Require modern C++
-set(CMAKE_CXX_STANDARD 14)
+# set(CMAKE_CXX_STANDARD 14)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(Games_Engineering)
@@ -11,15 +13,27 @@ SET(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 # Ouput all DLLs from all libs into main build folder
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
 
-#### Add External Dependencies ####
-add_subdirectory("lib/sfml")
-set(SFML_INCS "lib/sfml/include")
-link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
   -E copy_directory
     "${PROJECT_SOURCE_DIR}/res"
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
 )
+
+#### Add External Dependencies ####
+#add_subdirectory("lib/sfml")
+#set(SFML_INCS "lib/sfml/include")
+#link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
+#add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
+#  -E copy_directory
+#    "${PROJECT_SOURCE_DIR}/res"
+#    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
+#)
+
+# SFML - graphics library
+add_subdirectory("lib/sfml" EXCLUDE_FROM_ALL)
+#include_directories("lib/sfml/include")
+set(SFML_INCS "lib/sfml/include")
+link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
 ## B2D - Box2D phyics library
 add_subdirectory("lib/b2d/Box2D")
@@ -113,3 +127,10 @@ source_group("resources" FILES ${RESOURCE_FILES})
 #target_include_directories(7_PLATFORMER SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 target_link_libraries(7_PLATFORMER lib_engine)
 set(EXECUTABLES ${EXECUTABLES} 7_PLATFORMER)
+
+add_dependencies(7_PLATFORMER copy_resources)
+
+set_target_properties(7_PLATFORMER 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
