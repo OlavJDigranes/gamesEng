@@ -134,3 +134,28 @@ set_target_properties(7_PLATFORMER
     PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
 )
+
+## Steering
+file(GLOB_RECURSE SOURCES 8_steering/*.cpp 8_steering/*.h)
+file(GLOB_RECURSE CMPNTS 8_steering/components/*.cpp 8_steering/components/*.h)
+file(GLOB_RECURSE PF_CMPNTS 8_steering/pf_components/*.cpp 8_steering/pf_components/*.h)
+file(GLOB_RECURSE SCENES 8_steering/scenes/*.cpp 8_steering/scenes/*.h)
+add_executable(8_STEERING ${SOURCES} ${CMPNTS} ${SCENES} ${PF_CMPNTS})
+source_group("components" FILES ${CMPNTS})
+source_group("pf_components" FILES ${PF_CMPNTS})
+target_link_libraries(8_STEERING lib_engine)
+set(EXECUTABLES ${EXECUTABLES} 8_STEERING)
+
+set_target_properties(8_STEERING 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+
+add_dependencies(8_STEERING copy_resources)
+
+#file(GLOB_RECURSE SOURCES 8_steering/*.cpp 8_steering/*.h)
+#file(GLOB_RECURSE CMPNTS 8_steering/components/*.cpp 8_steering/components/*.h)
+#file(GLOB_RECURSE SCENES 8_steering/scenes/*.cpp 8_steering/scenes/*.h)
+#add_executable(8_STEERING ${SOURCES} ${CMPNTS} ${SCENES} ${RESOURCE_FILES})
+#target_link_libraries(8_STEERING lib_engine)
+#set(EXECUTABLES ${EXECUTABLES} 8_STEERING)
