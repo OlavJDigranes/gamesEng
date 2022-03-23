@@ -1,25 +1,17 @@
+
 #pragma once
 #include <ecm.h>
 
-// A component to allow basic movement behaviour
 class ActorMovementComponent : public Component {
 protected:
-	// Speed we can travel
-	float _speed;
-	// Checks if the move is valid.
-	bool validMove(const sf::Vector2f&);
+  bool validMove(const sf::Vector2f&);
+  float _speed;
 
 public:
-	// Will check the keyboard and move the component's parent.
-	void update(double) override;
-	// Moves the component's parent.
-	void move(const sf::Vector2f&);
-	// Moves the component's parent.
-	void move(float x, float y);
-	// Component does not need rendered.
-	void render() override {}
-	// Used to create the component for an entity
-	explicit ActorMovementComponent(Entity* p);
-
-	ActorMovementComponent() = delete;
+  void update(double dt) override;
+  void move(const sf::Vector2f&);
+  void move(float x, float y);
+  void render() override {}
+  explicit ActorMovementComponent(Entity* p);
+  ActorMovementComponent() = delete;
 };

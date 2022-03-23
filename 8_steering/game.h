@@ -5,4 +5,4 @@
 
 extern MenuScene menu;
 extern SteeringScene steeringScene;
-extern PathfindingScene pathfindinScene;
+extern PathfindingScene pathfindingScene;

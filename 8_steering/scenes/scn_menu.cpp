@@ -20,7 +20,7 @@ void MenuScene::Update(const double& dt) {
 		Engine::ChangeScene(&steeringScene);
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Num2)) {
-		Engine::ChangeScene(&pathfindinScene);
+		Engine::ChangeScene(&pathfindingScene);
 	}
 	Scene::Update(dt);
 }
