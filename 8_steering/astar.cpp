@@ -111,6 +111,7 @@ vector<Vector2i> pathFind(Vector2i start, Vector2i finish) {
                 next.y > ls::getHeight() ||
                 ls::getTile(Vector2ul(next.x, next.y)) == LevelSystem::WALL ||
                 closed_nodes_map[next.x][next.y])) {
+                
                 // Generate new node
                 Node m0(next, n0.getLevel(), n0.getPriority());
                 m0.nextLevel();
@@ -118,19 +119,25 @@ vector<Vector2i> pathFind(Vector2i start, Vector2i finish) {
 
                 // Check if new node has no priority
                 if (open_nodes_map[next.x][next.y] == 0) {
+                    
                     // Update priority and add to the queue.
                     open_nodes_map[next.x][next.y] = m0.getPriority();
                     queue[queue_index].push(m0);
+                    
                     // Put the opposite direction into the direction map.
                     // We work backwards.
                     direction_map[next.x][next.y] = dir * -1;
                 }
+                
                 // If it has a priority, check if the priority is better on the new // route.
                 else if (open_nodes_map[next.x][next.y] > m0.getPriority()) {
+                    
                     // Update the priority information
                     open_nodes_map[next.x][next.y] = m0.getPriority();
+                    
                     // Update the direction map with the inverse direction.
                     direction_map[next.x][next.y] = dir * -1;
+                    
                     // Now replace the node via swapping across the lists and ignoring
                     // the old one.
                     while (queue[queue_index].top().getPos() != next) {
