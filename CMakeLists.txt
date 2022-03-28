@@ -153,6 +153,21 @@ set_target_properties(8_STEERING
 
 add_dependencies(8_STEERING copy_resources)
 
+## Decisions
+file(GLOB_RECURSE SOURCES 9_decisions/*.cpp 9_decisions/*.h)
+file(GLOB_RECURSE CMPNTS 9_decisions/components/*.cpp 9_decisions/components/*.h)
+file(GLOB_RECURSE SCENES 9_decisions/scenes/*.cpp 9_decisions/scenes/*.h)
+add_executable(9_DECISIONS ${SOURCES} ${CMPNTS} ${SCENES})
+source_group("components" FILES ${CMPNTS})
+source_group("scenes" FILES ${SCENES}})
+target_link_libraries(9_DECISIONS lib_engine)
+set(EXECUTABLES ${EXECUTABLES} 9_DECISIONS)
+set_target_properties(9_DECISIONS 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+add_dependencies(9_DECISIONS copy_resources)
+
 #file(GLOB_RECURSE SOURCES 8_steering/*.cpp 8_steering/*.h)
 #file(GLOB_RECURSE CMPNTS 8_steering/components/*.cpp 8_steering/components/*.h)
 #file(GLOB_RECURSE SCENES 8_steering/scenes/*.cpp 8_steering/scenes/*.h)
