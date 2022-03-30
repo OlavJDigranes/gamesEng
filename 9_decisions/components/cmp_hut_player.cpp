@@ -1,3 +1,4 @@
+/*
 #include "cmp_hurt_player.h"
 #include <engine.h>
 
@@ -15,3 +16,5 @@ void HurtComponent::update(double dt) {
 
 HurtComponent::HurtComponent(Entity* p)
     : Component(p), _player(_parent->scene->ents.Find("player")[0]) {}
+
+    */
