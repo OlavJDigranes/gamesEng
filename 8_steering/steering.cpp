@@ -25,6 +25,6 @@ SteeringOutput Face::getSteering() const noexcept {
     SteeringOutput steering;
     steering.direction = _target->getPosition() - _character->getPosition();
     steering.direction = normalize(steering.direction);
-    steering.rotation = (atan2(steering.direction.x, steering.direction.y) - _character->getRotation()) * _maxSpeed;
+    steering.rotation = (atan2(steering.direction.y, steering.direction.x) - _character->getRotation()) * _maxSpeed;
     return steering;
 }
