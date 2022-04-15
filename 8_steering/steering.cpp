@@ -20,3 +20,11 @@ SteeringOutput Flee::getSteering() const noexcept {
     steering.rotation = 0.0f;
     return steering;
 }
+
+SteeringOutput Face::getSteering() const noexcept {
+    SteeringOutput steering;
+    steering.direction = _target->getPosition() - _character->getPosition();
+    steering.direction = normalize(steering.direction);
+    steering.rotation = (atan2(steering.direction.x, steering.direction.y) - _character->getRotation()) * _maxSpeed;
+    return steering;
+}

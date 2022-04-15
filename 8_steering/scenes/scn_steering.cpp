@@ -31,7 +31,7 @@ void SteeringScene::Load() {
         auto enemy = makeEntity();
         enemy->setPosition(Vector2f(x_dist(engine), y_dist(engine)));
         auto s = enemy->addComponent<ShapeComponent>();
-        s->setShape<RectangleShape>(Vector2f(10.0f, 10.0f));
+        s->setShape<CircleShape>(10.0f, 3.0f);
         s->getShape().setFillColor(Color::Blue);
         enemy->addComponent<SteeringComponent>(player.get());
     }
