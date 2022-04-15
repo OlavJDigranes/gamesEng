@@ -48,3 +48,11 @@ public:
         sm[0]->changeState("flee");
     }
 };
+
+class FaceDesicion : public DecisionTreeNode {
+public:
+    void makeDecision(Entity* owner) final {
+        auto sm = owner->get_components<StateMachineComponent>();
+        sm[0]->changeState("face"); 
+    }
+};

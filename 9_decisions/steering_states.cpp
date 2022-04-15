@@ -21,3 +21,11 @@ void FleeState::execute(Entity* owner, double dt) noexcept {
     auto output = _steering.getSteering();
     owner->setPosition(owner->getPosition() + (output.direction * (float)dt));
 }
+
+void FaceState::execute(Entity* owner, double dt) noexcept {
+    auto s = owner->get_components<ShapeComponent>(); 
+    s[0]->getShape().setFillColor(Color::Magenta);
+    auto output = _steering.getSteering(); 
+    owner->setPosition(owner->getPosition() * (output.rotation * (float)dt)); 
+    //owner->setPosition(owner->getPosition() + (output.rotation * (float)dt)); 
+}

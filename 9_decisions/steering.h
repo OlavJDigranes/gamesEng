@@ -45,3 +45,30 @@ public:
         : _character(character), _target(target), _maxSpeed(maxSpeed) { }
     SteeringOutput getSteering() const noexcept;
 };
+
+//Arrive Steering Behaviour
+class Arrive : public SteeringBehaviour {
+private:
+    Entity* _character;
+    Entity* _target;
+    float _maxSpeed;
+public:
+    Arrive() = delete;
+    Arrive(Entity* character, Entity* target, float maxSpeed)
+        : _character(character), _target(target), _maxSpeed(maxSpeed) { }
+    SteeringOutput getSteering() const noexcept;
+};
+
+
+//Face Steering Behaviour
+class Face : public SteeringBehaviour {
+private:
+    Entity* _character;
+    Entity* _target;
+    float _maxSpeed;
+public: 
+    Face() = delete; 
+    Face(Entity* character, Entity* target, float maxSpeed)
+        : _character(character), _target(target), _maxSpeed(maxSpeed) { }
+    SteeringOutput getSteering() const noexcept;
+};

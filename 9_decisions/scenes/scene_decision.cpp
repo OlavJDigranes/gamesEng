@@ -33,26 +33,29 @@ void DecisionScene::Load()
         auto enemy = makeEntity();
         enemy->setPosition(Vector2f(x_dist(engine), y_dist(engine)));
         auto s = enemy->addComponent<ShapeComponent>();
-        s->setShape<CircleShape>(10.0f);
+        s->setShape<CircleShape>(10.0f, 3.0f);
         s->getShape().setFillColor(Color::Blue);
 
         auto sm = enemy->addComponent<StateMachineComponent>();
         sm->addState("stationary", make_shared<StationaryState>());
         sm->addState("seek", make_shared<SeekState>(enemy, player));
         sm->addState("flee", make_shared<FleeState>(enemy, player));
+        sm->addState("face", make_shared<FaceState>(enemy, player));
 
-        auto decision = make_shared<DistanceDecision>(
-            player,
-            50.0f,
-            make_shared<FleeDecision>(),
-            make_shared<DistanceDecision>(
-                player,
-                100.0f,
-                make_shared<RandomDecision>(
-                    make_shared<SeekDecision>(),
-                    make_shared<StationaryDecision>()),
-                make_shared<SeekDecision>()));
-
+        auto decision = make_shared<DistanceDecision>(player, 50.0f, make_shared<FleeDecision>(), make_shared<DistanceDecision>(player, 100.0f, make_shared<RandomDecision>(make_shared<SeekDecision>(), make_shared<StationaryDecision>()), make_shared<SeekDecision>()));
+        
+        //auto decision = make_shared<DistanceDecision>(
+        //    player,
+        //    50.0f,
+        //    make_shared<FleeDecision>(),
+        //    make_shared<DistanceDecision>(
+        //        player,
+        //        100.0f,
+        //        make_shared<RandomDecision>(
+        //            make_shared<SeekDecision>(),
+        //            make_shared<StationaryDecision>()),
+        //        make_shared<SeekDecision>()));
+        //
         enemy->addComponent<DecisionTreeComponent>(decision);
     }
 }
