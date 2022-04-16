@@ -38,6 +38,23 @@ void SteeringComponent::move(const sf::Vector2f& p, float f) {
     }
     _parent->setRotation(f); 
     //std::cout << _parent->getRotation() << std::endl; 
+    printf("%f\n", _parent->getRotation());
 }
 
 void SteeringComponent::move(float x, float y, float f) { move(Vector2f(x, y), f); }
+
+void SteeringComponent::rotate(float d, float dt) {
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = Physics::sv2_to_bv2(_parent->getPosition());
+    _body = Physics::GetWorld()->CreateBody(&bodyDef);
+    _body->SetActive(true);
+    _body->SetLinearDamping(0.5);
+
+    _direction = Physics::sv2_to_bv2(Physics::bv2_to_sv2(_direction).rotatedBy(sf::degrees(degrees * dt)));
+    if (_body->GetAngle() > 4 * atan(1)) {
+        _body->SetTransform(_body->GetPosition(), -4 * atan(1));
+    }
+    _body->SetTransform(_body->GetPosition(), _body->GetAngle() + sf::deg2rad(degrees * dt));
+    _parent->setRotation(_parent->getRotation() + (degrees * dt));
+}
