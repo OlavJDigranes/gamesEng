@@ -51,10 +51,10 @@ void SteeringComponent::rotate(float d, float dt) {
     _body->SetActive(true);
     _body->SetLinearDamping(0.5);
 
-    _direction = Physics::sv2_to_bv2(Physics::bv2_to_sv2(_direction).rotatedBy(sf::degrees(degrees * dt)));
+    _direction = Physics::sv2_to_bv2(Physics::bv2_to_sv2(_direction).rotatedBy(sf::degrees(d * dt)));
     if (_body->GetAngle() > 4 * atan(1)) {
         _body->SetTransform(_body->GetPosition(), -4 * atan(1));
     }
-    _body->SetTransform(_body->GetPosition(), _body->GetAngle() + sf::deg2rad(degrees * dt));
-    _parent->setRotation(_parent->getRotation() + (degrees * dt));
+    _body->SetTransform(_body->GetPosition(), _body->GetAngle() + sf::deg2rad(d * dt));
+    _parent->setRotation(_parent->getRotation() + (d * dt));
 }
