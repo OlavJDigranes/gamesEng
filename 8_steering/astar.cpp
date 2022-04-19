@@ -117,7 +117,7 @@ vector<Vector2i> pathFind(Vector2i start, Vector2i finish) {
                 m0.nextLevel();
                 m0.updatePriority(finish);
 
-                // Check if new node has no priority
+                // Check if new node has no priority.
                 if (open_nodes_map[next.x][next.y] == 0) {
                     
                     // Update priority and add to the queue.
